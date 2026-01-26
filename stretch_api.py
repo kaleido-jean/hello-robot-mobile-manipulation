@@ -29,6 +29,9 @@ robot.wait_command()
 
 # Then open the gripper and close it. 
 robot.end_of_arm.move_to('stretch_gripper', 100) #-100~100
+robot.wait_command()
+robot.end_of_arm.move_to('stretch_gripper', -100) #-100~100
+robot.wait_command()
 
 # Then rotate both of the two motors connected to the RealSense (head
 # camera). 
@@ -41,11 +44,15 @@ robot.stow()
 
 # Once in stow, drive the robot forward 0.5 meters, rotate 180 degrees, then drive 0.5
 # meters forward (back to the starting position).
-robot.base.translate_to(0.5)
+robot.base.translate_by(0.5)
 robot.push_command()
 robot.wait_command()
 
-robot.base.rotate_by(0.1)
+robot.base.rotate_by(np.radians(180))
+robot.push_command()
+robot.wait_command()
+
+robot.base.translate_by(-0.5)
 robot.push_command()
 robot.wait_command()
 

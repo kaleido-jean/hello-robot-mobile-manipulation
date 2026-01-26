@@ -1,2 +1,4 @@
 *.pdf
 .venv
+.vscode
+stretch_install/
