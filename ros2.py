@@ -12,8 +12,8 @@ try:
 
     # Extend the telescoping arm all the way out and raise the lift all the way up at the
     # same time.
-    node.move_to_pose({'joint_arm': 0.52}, blocking=False)
-    node.move_to_pose({'joint_lift': 1.10}, blocking=True)
+    node.move_to_pose({'joint_arm': 0.52,'joint_lift': 1.10}, blocking=True)
+    # node.move_to_pose({'joint_lift': 1.10}, blocking=True)
 
     # Once lifted, move all three of the wrist motors, one at a time (not all at
     # once). Any rotation amount is fine as long as it is visible. 
@@ -32,8 +32,8 @@ try:
 
     # Then rotate both of the two motors connected to the RealSense (head
     # camera). 
-    node.move_to_pose({'joint_head_pan': np.radians(30)}, blocking=True) #TODO: check joint limit
-    node.move_to_pose({'joint_head_tilt': np.radians(30)}, blocking=True)
+    node.move_to_pose({'joint_head_pan': np.radians(30),'joint_head_tilt': np.radians(30)}, blocking=True) #TODO: check joint limit
+    # node.move_to_pose({'joint_head_tilt': np.radians(30)}, blocking=True)
 
     # Then reset everything back to the ‘stow’ position.
     node.stow_the_robot()
