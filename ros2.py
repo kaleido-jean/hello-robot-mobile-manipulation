@@ -1,4 +1,4 @@
-# os2 launch stretch_core stretch_driver.launch.py
+# ros2 launch stretch_core stretch_driver.launch.py
 # run this first in hello robot terminal
 
 import hello_helpers.hello_misc as hm
@@ -49,5 +49,5 @@ try:
     # t = node.get_robot_floor_pose_xya(floor_frame='odom')
 
 finally:
-    node.stop()
+    node.stop_the_robot()
     node.get_logger().info()
