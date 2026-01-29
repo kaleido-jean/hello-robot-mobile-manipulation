@@ -50,4 +50,4 @@ try:
 
 finally:
     node.stop_the_robot()
-    node.get_logger().info()
+    node.get_logger().info('Robot resource is released.')
