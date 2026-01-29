@@ -24,7 +24,9 @@ try:
     # Once lifted, move all three of the wrist motors, one at a time (not all at
     # once). Any rotation amount is fine as long as it is visible. 
     robot.end_of_arm.move_to('wrist_yaw', np.radians(30)) #rads
+    robot.wait_command()
     robot.end_of_arm.move_to('wrist_roll', np.radians(30))
+    robot.wait_command()
     robot.end_of_arm.move_to('wrist_pitch', np.radians(30))
     robot.wait_command()
 
