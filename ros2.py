@@ -13,7 +13,7 @@ try:
     # Extend the telescoping arm all the way out and raise the lift all the way up at the
     # same time.
     node.move_to_pose({'joint_arm': 0.52}, blocking=False)
-    node.move_to_pose({'joint_lift': 1.10}, blocking=False)
+    node.move_to_pose({'joint_lift': 1.10}, blocking=True)
 
     # Once lifted, move all three of the wrist motors, one at a time (not all at
     # once). Any rotation amount is fine as long as it is visible. 
