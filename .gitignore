@@ -2,3 +2,9 @@
 .venv
 .vscode
 stretch_install/
+build/
+install/
+log/
+hello_robot/
+stretch_ros2/
+stretch_user/

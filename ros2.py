@@ -42,8 +42,9 @@ node.stow_the_robot()
 # meters forward (back to the starting position).
 
 # TODO
-node.move_to_pose({'joint_base': np.radians(30)}, blocking=True)
-
+node.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
+node.move_to_pose({'rotate_mobile_base': np.radians(180)}, blocking=True)
+node.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
 
 # t = node.get_robot_floor_pose_xya(floor_frame='odom')
 

@@ -52,7 +52,7 @@ robot.base.rotate_by(np.radians(180))
 robot.push_command()
 robot.wait_command()
 
-robot.base.translate_by(-0.5)
+robot.base.translate_by(0.5)
 robot.push_command()
 robot.wait_command()
 
