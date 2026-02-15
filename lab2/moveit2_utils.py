@@ -1,14 +1,23 @@
 import yaml, copy
 import numpy as np
 from geometry_msgs.msg import Pose
-from moveit.planning import MoveItPy, PlanRequestParameters
+from moveit.core.planning_scene import PlanningScene
+from moveit.planning import MoveItPy, PlanRequestParameters, PlanningComponent, PlanningSceneMonitor
 from moveit_configs_utils import MoveItConfigsBuilder
 from moveit_msgs.msg import CollisionObject
 from shape_msgs.msg import SolidPrimitive
 import tf_transformations as tf
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
-def create_collision_object(moveit, name, frame_id, shape_type, dimensions, position, orientation=(0.0, 0.0, 0.0, 1.0)):
+def create_collision_object(
+        moveit:MoveItPy, 
+        name, 
+        frame_id, 
+        shape_type, 
+        dimensions, 
+        position, 
+        orientation=(0.0, 0.0, 0.0, 1.0)
+    ):
     """
     frame_id: which link on the robot is this object's position/orientation defined relative to?
     shape_type: SolidPrimitive.BOX, ... BOX, SPHERE, CYLINDER, CONE, PRISM
@@ -38,8 +47,9 @@ def create_collision_object(moveit, name, frame_id, shape_type, dimensions, posi
     
     co.operation = CollisionObject.ADD
 
-    planning_scene_monitor = moveit.get_planning_scene_monitor()
+    planning_scene_monitor: PlanningSceneMonitor = moveit.get_planning_scene_monitor()
     with planning_scene_monitor.read_write() as scene:
+        scene: PlanningScene = scene
         scene.apply_collision_object(co)
         scene.current_state.update()
 
@@ -121,7 +131,7 @@ def setup_moveit(planning_group='mobile_base_arm'):
 
     moveit = MoveItPy(node_name='moveit_py_node', config_dict=moveit_config_dict)
 
-    moveit_plan = moveit.get_planning_component(planning_group)
+    moveit_plan: PlanningComponent = moveit.get_planning_component(planning_group)
     moveit_plan.set_workspace(-2.0, -2.0, -1.0, 2.0, 2.0, 2.0)
 
     planning_params = PlanRequestParameters(moveit)
