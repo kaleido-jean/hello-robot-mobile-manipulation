@@ -68,6 +68,14 @@ def setup_moveit(planning_group='mobile_base_arm'):
         .to_moveit_configs()
     ).to_dict()
 
+    if 'robot_description_planning' not in moveit_config_dict:
+        moveit_config_dict['robot_description_planning'] = {}
+
+    moveit_config_dict['robot_description_planning'].update({
+        "start_state_max_bounds_error": 0.1, 
+        "jiggle_fraction": 0.05
+    })
+
     moveit_controllers = {
         'controller_names': ['stretch_controller'],
         'stretch_controller': {
@@ -111,8 +119,8 @@ def setup_moveit(planning_group='mobile_base_arm'):
     moveit_config_dict['robot_description_kinematics']['mobile_base_arm'] = {
         'kinematics_solver': 'stretch_kinematics_plugin/StretchKinematicsPlugin',
         'kinematics_solver_search_resolution': 0.005,
-        "kinematics_solver_timeout": 5,
-        "kinematics_solver_attempts": 30,
+        "kinematics_solver_timeout": 10,
+        "kinematics_solver_attempts": 60,
     }
     moveit_config_dict['robot_description_kinematics']['stretch_arm'] = {
         'kinematics_solver': 'kdl_kinematics_plugin/KDLKinematicsPlugin',
@@ -132,7 +140,7 @@ def setup_moveit(planning_group='mobile_base_arm'):
     moveit = MoveItPy(node_name='moveit_py_node', config_dict=moveit_config_dict)
 
     moveit_plan: PlanningComponent = moveit.get_planning_component(planning_group)
-    moveit_plan.set_workspace(-2.0, -2.0, -1.0, 2.0, 2.0, 2.0)
+    moveit_plan.set_workspace(-5.0, -5.0, -1.0, 5.0, 5.0, 2.0)
 
     planning_params = PlanRequestParameters(moveit)
     planning_params.planning_pipeline = 'ompl'
