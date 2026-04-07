@@ -86,7 +86,7 @@ class TouchEnv(gym.Env):
         reward = - distance
         if self.prev_distance is not None:
             reward += 0.3 * (self.prev_distance - distance)
-        reward -= 0.5 * np.linalg.norm(obj_pos - self.init_obj_pos)
+        reward -= 5 * np.linalg.norm(obj_pos - self.init_obj_pos)
 
         # TODO: -------------- end ---------------
 
