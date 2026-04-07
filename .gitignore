@@ -7,3 +7,5 @@ install/
 log/
 third_party/
 groupwork/
+
+**/__pycache__/
